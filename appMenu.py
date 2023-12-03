@@ -9,9 +9,7 @@ app = Flask(__name__)
 menu = {
     "appetizers": ["Bruschetta", "Spinach Artichoke Dip", "Stuffed Mushrooms"],
     "main_courses": ["Chicken Alfredo", "Grilled Salmon", "Vegetarian Pasta"],
-    "desserts": ["Chocolate Lava Cake", "Cheesecake", "Tiramisu", "Apple"],
-    "terminologylist": ["Barack Obama", "Angela Merkel", "Washington, D.C."],
-    "Phrase Matching": ["Abcd"]
+    "desserts": ["Chocolate Lava Cake", "Cheesecake", "Tiramisu", "Apple"]
 }
 
 # Load spaCy model
@@ -32,32 +30,31 @@ def index():
 @app.route('/', methods=['POST'])
 def get_recommendation():
     user_input = request.form['user_input']
-    print(user_input)
+
     # Implementing the NLP logic.
     # Processing user input with spaCy.
     # Matching user input with menu items,
     #  and returning a recommendation.
     user_doc = nlp(user_input.lower())
     #user_doc = nlp(user_input)
-    print([token.text for token in user_doc])
+
     # Find matches with the PhraseMatcher
     matches = matcher(user_doc)
-    for match_id, start, end in matches:
-        span = user_doc[start:end]
-        print(span.text)
-        match_id_string = nlp.vocab.strings[match_id]
-        print(match_id_string)
 
     if matches:
-        print("TROVATO!")
         print(matches)
         # Get the category with the most matches
         # best_match = max(matches, key=lambda x: len(x[0]))
-        best_match = max(matches)
-        print(best_match)        
+        # best_match = max(matches)
+        def most_frequent(List):
+            return max(set(List), key = List.count)
+
+        best_match = most_frequent(matches)
+
+       
         # Extract the category name
         category_id_string = nlp.vocab.strings[best_match[0]]
-        print(category_id_string)
+        print("best categoy: ", category_id_string)
 
         # Get a random recommendation from the selected category
         recommendation = "(" + category_id_string + ") " + random.choice(menu[category_id_string])

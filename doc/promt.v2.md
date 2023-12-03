@@ -5,6 +5,12 @@ Certainly! I'll provide you with a basic example of how you can use spaCy for NL
 ```bash
 pip install spacy
 ```
+NOTA JORGE begin
+With spaCy installed in your virtual environment, you’re almost ready to get started with NLP. But there’s one more thing you’ll have to install:
+```bash
+python -m spacy download en_core_web_sm
+```
+end
 
 Now, let's modify the `app.py` script to include spaCy for NLP:
 

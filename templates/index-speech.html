@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Recommender</title>
+</head>
+<body>
+    <h1>Menu Recommender</h1>
+    <form method="post">
+        <label for="user_input">Ask for a menu recommendation</label>
+        <button type="submit">speaking to microphone</button>
+    </form>
+    {% if user_input %}
+        <p>Audio translated: {{ user_input }}</p>
+    {% endif %}
+    {% if recommendation %}
+        <p>Your recommendation: {{ recommendation }}</p>
+    {% endif %}
+</body>
+</html>
